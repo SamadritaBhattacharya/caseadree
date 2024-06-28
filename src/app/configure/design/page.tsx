@@ -1,3 +1,5 @@
+import { notFound } from "next/navigation"
+
 interface PageProps {
   searchParams : {
     [key:string]: string | string[] | undefined 
@@ -5,13 +7,16 @@ interface PageProps {
 }
 const page = async ({searchParams}: PageProps) => {
 
+//make a db call (it happens on the server)
   const {id } = searchParams
 
-  //make a db call (it happens on the server)
-
+  if(!id || typeof id !== "string"){
+    return notFound();
+  }
+ 
   
   return (
-    <div>Design</div>
+    <div>{id}</div>
   )
 }
 
