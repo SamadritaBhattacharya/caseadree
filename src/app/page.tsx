@@ -254,7 +254,7 @@ export default function Home() {
             </li>
             <li className='w-fit'>
               <Check className='h-5 w-5 text-green-600 inline mr-1.5' />
-              Scratch- and fingerprint resistant coating
+              Scratch and fingerprint resistant coating
             </li>
             <li className='w-fit'>
               <Check className='h-5 w-5 text-green-600 inline mr-1.5' />
