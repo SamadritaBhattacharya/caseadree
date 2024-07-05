@@ -1,4 +1,3 @@
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,15 +7,53 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-//image -> {url, h,w ie, aspect ratio , cropped image}
+enum OrderStatus {
+  fulfilled
+  shipped
+  awaiting_shipment
+}
 
-//database model 
+enum PhoneModel {
+  iphonex
+  iphone11
+  iphone12
+  iphone13
+  iphone14
+  iphone15
+}
+
+enum CaseMaterial {
+  silicon
+  polycarbonate
+}
+
+enum CaseFinish {
+  smooth
+  textured
+}
+
+enum CaseColor {
+  black
+  blue
+  rose
+  cyan
+  white
+}
+
+
+
 
 model Configuration {
   id              String        @id @default(cuid())
   width           Int
-  height           Int
+  height          Int
   imageUrl        String
-  croppedImageUrl     String?
-
+  color           CaseColor?
+  model           PhoneModel?
+  material        CaseMaterial?
+  finish          CaseFinish?
+  croppedImageUrl String?
+  
 }
+
+
