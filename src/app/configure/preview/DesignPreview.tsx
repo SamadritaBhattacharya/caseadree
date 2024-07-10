@@ -10,18 +10,18 @@ import { useMutation } from '@tanstack/react-query'
 import { ArrowRight, Check } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import Confetti from 'react-dom-confetti'
-// import { createCheckoutSession } from './actions'
-// import { useRouter } from 'next/navigation'
-// import { useToast } from '@/components/ui/use-toast'
-// import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs'
-// import LoginModal from '@/components/LoginModal'
+import { createCheckoutSession } from './actions'
+import { useRouter } from 'next/navigation'
+import { useToast } from '@/components/ui/use-toast'
+import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs'
+import LoginModal from '@/components/LoginModal'
 
 const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
-  // const router = useRouter()
-  // const { toast } = useToast()
-  // const { id } = configuration
-  // const { user } = useKindeBrowserClient()
-  // const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false)
+  const router = useRouter()
+  const { toast } = useToast()
+  const { id } = configuration
+  const { user } = useKindeBrowserClient()
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false)
 
   const [showConfetti, setShowConfetti] = useState<boolean>(false)
   useEffect(() => setShowConfetti(true))
@@ -39,33 +39,33 @@ const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
     totalPrice += PRODUCT_PRICES.material.polycarbonate
   if (finish === 'textured') totalPrice += PRODUCT_PRICES.finish.textured
 
-  //to generate a payment session in stripe 
-  // const { mutate: createPaymentSession } = useMutation({
-  //   mutationKey: ['get-checkout-session'],
-  //   mutationFn: createCheckoutSession,
-  //   onSuccess: ({ url }) => {
-  //     if (url) router.push(url)
-  //     else throw new Error('Unable to retrieve payment URL.')
-  //   },
-  //   onError: () => {
-  //     toast({
-  //       title: 'Something went wrong',
-  //       description: 'There was an error on our end. Please try again.',
-  //       variant: 'destructive',
-  //     })
-  //   },
-  // })
+ // to generate a payment session in stripe 
+ const { mutate: createPaymentSession } = useMutation({
+  mutationKey: ['get-checkout-session'],
+  mutationFn: createCheckoutSession,
+  onSuccess: ({ url }) => {
+    if (url) router.push(url)
+    else throw new Error('Unable to retrieve payment URL.')
+  },
+    onError: () => {
+      toast({
+        title: 'Something went wrong',
+        description: 'There was an error on our end. Please try again.',
+        variant: 'destructive',
+      })
+    },
+  })
 
-  // const handleCheckout = () => {
-  //   if (user) {
-  //     // create payment session
-  //     createPaymentSession({ configId: id })
-  //   } else {
-  //     // need to log in
-  //     localStorage.setItem('configurationId', id)
-  //     setIsLoginModalOpen(true)
-  //   }
-  // }
+  const handleCheckout = () => {
+    if (user) {
+      // create payment session
+      createPaymentSession({ configId: id })
+    } else {
+      // need to log in
+      localStorage.setItem('configurationId', id)
+      setIsLoginModalOpen(true)
+    }
+  }
 
   return (
     <>
@@ -78,7 +78,7 @@ const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
         />
       </div>
 
-      {/* <LoginModal isOpen={isLoginModalOpen} setIsOpen={setIsLoginModalOpen} /> */}
+      <LoginModal isOpen={isLoginModalOpen} setIsOpen={setIsLoginModalOpen} />
 
       <div className='mt-20 flex flex-col items-center md:grid text-sm sm:grid-cols-12 sm:grid-rows-1 sm:gap-x-6 md:gap-x-8 lg:gap-x-12'>
         <div className='md:col-span-4 lg:col-span-3 md:row-span-2 md:row-end-2'>
@@ -103,9 +103,7 @@ const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
             <div>
               <p className='font-medium text-zinc-950'>Highlights</p>
               <ol className='mt-3 text-zinc-700 list-disc list-inside'>
-                <div>
-                  
-                </div>
+                
                 <li>Wireless charging compatible</li>
                 <li>TPU shock absorption</li>
                 <li>Packaging made from recycled materials</li>
@@ -162,7 +160,7 @@ const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
 
             <div className='mt-8 flex justify-end pb-12'>
               <Button
-                
+                onClick={() => handleCheckout()}
                 className='px-4 sm:px-6 lg:px-8'>
                 Check out <ArrowRight className='h-4 w-4 ml-1.5 inline' />
               </Button>
