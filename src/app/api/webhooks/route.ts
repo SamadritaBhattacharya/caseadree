@@ -29,6 +29,8 @@ export async function POST (req: Request) {
 
 
             const session = event.data.object as Stripe.Checkout.Session
+            console.log("Checkout session completed");
+            
 
             const {userId, orderId} = session.metadata || {
                 userId: null,
@@ -40,7 +42,8 @@ export async function POST (req: Request) {
             }
 
 
-            //shipping process 
+            //shipping process , fullfilment of purchase and update the database 
+
             const billingAddress = session.customer_details!.address
             const shippingAddress = session.shipping_details!.address
 
@@ -73,10 +76,14 @@ export async function POST (req: Request) {
             },
         })
 
+        console.log('Event handlede successfully ');
+        
+        return NextResponse.json({ result: event, ok: true })
+
 
        
     } catch (err) {
-        console.error(err)
+        console.error("Error handling the event ",err)
 
         return NextResponse.json(
         { message: 'Something went wrong', ok: false },
