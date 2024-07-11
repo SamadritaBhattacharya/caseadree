@@ -29,7 +29,7 @@ export async function POST (req: Request) {
 
 
             const session = event.data.object as Stripe.Checkout.Session
-            console.log("Checkout session completed");
+            
             
 
             const {userId, orderId} = session.metadata || {
@@ -76,7 +76,7 @@ export async function POST (req: Request) {
             },
         })
 
-        console.log('Event handlede successfully ');
+        
         
         return NextResponse.json({ result: event, ok: true })
 
