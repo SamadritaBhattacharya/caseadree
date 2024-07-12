@@ -247,25 +247,28 @@ export default function Home() {
             </div>
           </div>
 
-          <ul className='mx-auto mt-12 max-w-prose sm:text-lg space-y-2 w-fit'>
-            <li className='w-fit'>
-              <Check className='h-5 w-5 text-green-600 inline mr-1.5' />
-              High-quality silicone material
-            </li>
-            <li className='w-fit'>
-              <Check className='h-5 w-5 text-green-600 inline mr-1.5' />
-              Scratch and fingerprint resistant coating
-            </li>
-            <li className='w-fit'>
-              <Check className='h-5 w-5 text-green-600 inline mr-1.5' />
-              Wireless charging compatible
-            </li>
-            <li className='w-fit'>
-              <Check className='h-5 w-5 text-green-600 inline mr-1.5' />5 year
-              print warranty
-            </li>
+          
 
-            <div className='flex justify-center'>
+          <ul className='mt-12 space-y-2 text-left   flex flex-col items-center sm:items-start w-fit mx-auto max-w-prose sm:text-lg '>
+                <div className='space-y-2 w-fit'>
+                  <li className='flex gap-1.5 items-center text-left w-fit'>
+                    <Check className='h-5 w-5 shrink-0 text-green-600 inline mr-1.5' />
+                    High-quality silicon material
+                  </li>
+                  <li className='flex gap-1.5 items-center text-left w-fit'>
+                    <Check className='h-5 w-5 shrink-0 text-green-600 inline mr-1.5' />Scratch and fingerprint resistant coating
+                  </li>
+                  <li className='flex gap-1.5 items-center text-left '>
+                    <Check className='h-5 w-5 shrink-0 text-green-600 inline mr-1.5' />
+                    Wireless charging compatible
+                  </li>
+                  <li className='flex gap-1.5 items-center text-left'>
+                    <Check className='h-5 w-5 shrink-0 text-green-600 inline mr-1.5' />
+                    5 years warranty
+                  </li>
+                </div>
+
+                <div className='flex justify-center'>
               <Link
                 className={buttonVariants({
                   size: 'lg',
@@ -275,7 +278,7 @@ export default function Home() {
                 Create your case now <ArrowRight className='h-4 w-4 ml-1.5' />
               </Link>
             </div>
-          </ul>
+              </ul>
         </MaxWidthWrapper>
       </section>
 
