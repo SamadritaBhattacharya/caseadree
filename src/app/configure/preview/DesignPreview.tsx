@@ -40,7 +40,7 @@ const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
   if (finish === 'textured') totalPrice += PRODUCT_PRICES.finish.textured
 
  // to generate a payment session in stripe 
- const { mutate: createPaymentSession } = useMutation({
+ const { mutate: createPaymentSession, isPending } = useMutation({
   mutationKey: ['get-checkout-session'],
   mutationFn: createCheckoutSession,
   onSuccess: ({ url }) => {
@@ -160,6 +160,9 @@ const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
 
             <div className='mt-8 flex justify-end pb-12'>
               <Button
+                isLoading = { isPending}
+                disabled = {isPending}
+                loadingText="Redirecting"
                 onClick={() => handleCheckout()}
                 className='px-4 sm:px-6 lg:px-8'>
                 Check out <ArrowRight className='h-4 w-4 ml-1.5 inline' />
