@@ -35,6 +35,8 @@ export async function POST (req: Request) {
 
 
             const session = event.data.object as Stripe.Checkout.Session
+            console.log('session', session);
+            
             
             
 
@@ -80,10 +82,18 @@ export async function POST (req: Request) {
                     },
                 },
             },
+            
+            
+            
+            
         })
+        
+        console.log('Reached');
+        
 
         await resend.emails.send({
-            from: 'CaseaDree <samadritabhatt163.official@gmail.com>',
+            from: 'onboarding@resend.dev',
+            // to:'samadritabhatt163.official@gmail.com',
             to: [event.data.object.customer_details.email],
             subject: 'Thanks for your order!',
             react: OrderReceivedEmail({
@@ -98,8 +108,12 @@ export async function POST (req: Request) {
                 street: shippingAddress!.line1!,
                 state: shippingAddress!.state,
               },
+              
             }),
           })
+          console.log('Email send');
+          
+          return {success: true, message: 'Thank you mail send successfully'}
         }
         
         
