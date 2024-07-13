@@ -88,12 +88,12 @@ export async function POST (req: Request) {
             
         })
         
-        console.log('Reached');
+        
         
 
         await resend.emails.send({
             from: 'onboarding@resend.dev',
-            // to:'samadritabhatt163.official@gmail.com',
+           
             to: [event.data.object.customer_details.email],
             subject: 'Thanks for your order!',
             react: OrderReceivedEmail({
@@ -111,9 +111,7 @@ export async function POST (req: Request) {
               
             }),
           })
-          console.log('Email send');
-          
-          return {success: true, message: 'Thank you mail send successfully'}
+         
         }
         
         
